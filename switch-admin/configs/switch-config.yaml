@@ -1,0 +1,105 @@
+# 服务器基础配置
+server:
+  port: 8080                    # HTTP服务监听端口
+  version: "1.0.0"              # 应用版本号
+  name: "switch-admin"          # 应用名称
+
+# MySQL数据库连接配置
+mysql:
+  host: "localhost"             # 数据库主机地址
+  port: 3306                    # 数据库端口
+  username: "root"              # 数据库用户名
+  password: "your_strong_password" # 数据库密码
+  dbname: "switch"              # 数据库名称
+  charset: "utf8mb4"            # 字符集编码
+  parseTime: true               # 是否解析时间类型
+  loc: "Local"                  # 时区设置
+  # 数据库日志配置
+  logging:
+    slow_threshold: "200ms"     # 慢SQL阈值
+    log_level: "warn"           # 日志级别：silent, error, warn, info
+    ignore_not_found: true      # 是否忽略记录未找到错误
+    parameterized: false        # 是否在SQL日志中包含参数
+    colorful: true              # 是否启用彩色日志
+  # 连接池配置
+  pool:
+    min_connections: 10         # 最小连接数
+    max_connections: 100        # 最大连接数
+    connect_timeout: 10         # 连接超时时间（秒）
+    max_idle_time: 900          # 连接最大空闲时间（秒，15分钟）
+
+# JWT认证配置
+jwt:
+  secret: "your_very_secret_key"    # JWT签名密钥
+  expiration_hours: 24              # JWT令牌过期时间（小时）
+  auto_login_expiration_hours: 1440 # 自动登录令牌过期时间（小时，60天）
+
+# 日志配置
+log_config:
+  level: "info"                     # 日志级别：debug, info, warn, error, fatal, panic
+  output_dir: "/Users/yuebuy/GolandProjects/factor-admin/runtime/logs" # 日志文件输出目录
+  file_name_format: "app_%Y-%m-%d.log" # 日志文件名格式，支持时间占位符
+  max_size: 100                     # 单个日志文件最大大小（MB）
+  max_backups: 7                    # 保留的旧日志文件最大数量
+  max_age: 30                       # 保留日志文件的最大天数
+  compress: false                   # 是否压缩旧日志文件
+  show_caller: true                 # 是否显示调用者信息
+  enable_console: true              # 是否启用控制台输出
+  enable_json: true                 # 是否启用JSON格式日志
+  enable_stack_trace: true          # 是否启用堆栈跟踪
+  stack_trace_level: "error"        # 堆栈跟踪的日志级别
+  time_format: "2006-01-02 15:04:05" # 时间格式化字符串
+
+# WebSocket服务器配置
+pc:
+  address: ":8081"                    # WebSocket监听地址和端口
+  readTimeout: "60s"                  # 读取数据超时时间
+  writeTimeout: "10s"                 # 写入数据超时时间
+  readBufferSize: 1024                # 读缓冲区大小（字节）
+  writeBufferSize: 1024               # 写缓冲区大小（字节）
+  heartbeatInterval: "30s"            # 心跳包发送间隔
+  clientTimeout: "90s"                # 客户端连接超时时间
+  maxConnections: 1000                # 最大并发连接数
+
+# 重试机制配置
+retry:
+  default: # 默认重试配置
+    timeout: 10s                    # 超时时间
+    max_retries: 3                  # 最大重试次数
+    retry_delay: 2s                 # 重试间隔时间
+  config_change: # 配置变更重试配置
+    timeout: 30s                    # 超时时间
+    max_retries: 5                  # 最大重试次数
+    retry_delay: 3s                 # 重试间隔时间
+  full_config: # 全量配置重试配置
+    timeout: 60s                    # 超时时间
+    max_retries: 3                  # 最大重试次数
+    retry_delay: 5s                 # 重试间隔时间
+  switch_data: # 开关数据重试配置
+    timeout: 30s                    # 超时时间
+    max_retries: 3                  # 最大重试次数
+    retry_delay: 2s                 # 重试间隔时间
+  ip_connectivity: # IP连通性检查配置
+    check_interval: "5m"            # 检查间隔时间
+    check_timeout: "5s"             # 检查超时时间
+    new_ip_queue_size: 100          # 新IP队列大小
+
+
+# 驱动替换配置
+replacement:
+  # Kafka Producer 驱动替换配置
+  kafka_producer_replace_driver_validation_timeout: "30s"  # Kafka Producer 驱动更新时新驱动的校验超时时间
+  kafka_producer_replace_driver_stability_period: "5s"     # Kafka Producer 驱动更新时新驱动的稳定期
+  kafka_producer_verify_brokers: false                      # Kafka Producer 驱动更新时是否校验 brokers 的位置
+
+  # Webhook Producer 驱动替换配置
+  webhook_producer_replace_driver_validation_timeout: "30s" # Webhook Producer 驱动更新时新驱动的校验超时时间
+  webhook_producer_replace_driver_stability_period: "3s"    # Webhook Producer 驱动更新时新驱动的稳定期
+
+  # Polling Producer 驱动替换配置
+  polling_producer_replace_driver_validation_timeout: "30s" # Polling Producer 驱动更新时新驱动的校验超时时间
+  polling_producer_replace_driver_stability_period: "3s"    # Polling Producer 驱动更新时新驱动的稳定期
+
+# 缓存配置
+cache:
+  cache_time: "3m"                  # 缓存过期时间

@@ -1,0 +1,9 @@
+{
+  "name": "Switch - 功能开关管理平台",
+  "short_name": "Switch",
+  "description": "一个支持动态规则配置的功能开关管理平台",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#002140",
+  "background_color": "#001529"
+}

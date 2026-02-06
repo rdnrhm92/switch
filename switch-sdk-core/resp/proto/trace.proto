@@ -1,0 +1,23 @@
+syntax = "proto3";
+package common.response.v1;
+option go_package = "gitee.com/fatzeng/switch-sdk-core/resp/proto;proto";
+
+// Trace 追踪信息
+message Trace {
+  // request id
+  string request_id = 1;
+  // trace id
+  string trace_id = 2;
+  // node id
+  string span_id = 3;
+  string version = 4;
+  // server name
+  string service_name = 5;
+  // host_name
+  string host_name = 6;
+  // ip
+  string ip = 7;
+  // env
+  string env = 8;
+
+}

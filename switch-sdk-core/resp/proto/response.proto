@@ -1,0 +1,32 @@
+// proto/common/response.proto
+syntax = "proto3";
+
+package common.response.v1;
+option go_package = "gitee.com/fatzeng/switch-sdk-core/resp/proto;proto";
+//https://gitee.com/fatzeng/switch-components.git
+
+
+import "google/protobuf/struct.proto";
+import "statistics.proto";
+import "trace.proto";
+import "debug_info.proto";
+
+// Resp 响应结构
+message Resp {
+  // resp code
+  optional int64  code = 1;
+  // resp message
+  string message = 2;
+  // resp data
+  google.protobuf.Value data = 3;
+  // request data
+  google.protobuf.Value params = 4;
+  // resp 扩展信息
+  google.protobuf.Value extra_data = 5;
+  // 统计信息
+  Statistics statistics = 6;
+  // 追踪信息
+  Trace trace = 7;
+  // debug信息
+  DebugInfo debug_info = 8;
+}

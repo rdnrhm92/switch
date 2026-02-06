@@ -1,0 +1,101 @@
+{
+  "name": "switch",
+  "version": "6.0.0",
+  "private": true,
+  "description": "switch front",
+  "repository": "https://gitee.com/fatzeng/collections/413616",
+  "scripts": {
+    "postinstall": "max setup",
+    "start:dev": "cross-env UMI_ENV=dev MOCK=none max dev",
+    "start:test": "cross-env UMI_ENV=test MOCK=none max dev",
+    "start:pre": "cross-env UMI_ENV=pre MOCK=none max dev",
+    "build": "max build",
+    "build:dev": "cross-env UMI_ENV=dev max build",
+    "build:test": "cross-env UMI_ENV=test max build",
+    "build:pre": "cross-env UMI_ENV=pre max build"
+  },
+  "browserslist": [
+    "defaults"
+  ],
+  "dependencies": {
+    "@ant-design/icons": "^5.6.1",
+    "@ant-design/pro-components": "^2.8.9",
+    "@ant-design/v5-patch-for-react-19": "^1.0.3",
+    "@codemirror/lang-json": "^6.1.0",
+    "@codemirror/lang-yaml": "^6.2.0",
+    "@codemirror/lint": "^6.12.0",
+    "@codemirror/view": "^6.38.1",
+    "@monaco-editor/react": "^4.7.0",
+    "@uiw/react-codemirror": "^5.0.0",
+    "@uiw/react-json-view": "^2.0.0-alpha.34",
+    "antd": "^5.26.4",
+    "antd-style": "^3.7.0",
+    "classnames": "^2.5.1",
+    "dayjs": "^1.11.13",
+    "js-yaml": "^4.1.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "uuid": "^11.1.0",
+    "yaml": "^2.8.1"
+  },
+  "devDependencies": {
+    "@ant-design/pro-cli": "^3.3.0",
+    "@biomejs/biome": "^2.1.1",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/react": "^16.3.0",
+    "@types/express": "^5.0.3",
+    "@types/jest": "^30.0.0",
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^24.0.13",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@types/react-helmet": "^6.1.11",
+    "@umijs/max": "^4.3.24",
+    "cross-env": "^7.0.3",
+    "express": "^4.21.1",
+    "gh-pages": "^6.1.1",
+    "husky": "^9.1.7",
+    "jest": "^30.0.4",
+    "jest-environment-jsdom": "^29.7.0",
+    "lint-staged": "^16.1.2",
+    "mockjs": "^1.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3",
+    "umi-presets-pro": "^2.0.3",
+    "umi-serve": "^1.9.11"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "create-umi": {
+    "ignoreScript": [
+      "docker*",
+      "functions*",
+      "site",
+      "generateMock"
+    ],
+    "ignoreDependencies": [
+      "netlify*",
+      "serverless"
+    ],
+    "ignore": [
+      ".dockerignore",
+      ".git",
+      ".github",
+      ".gitpod.yml",
+      "CODE_OF_CONDUCT.md",
+      "Dockerfile",
+      "Dockerfile.*",
+      "lambda",
+      "LICENSE",
+      "netlify.toml",
+      "README.*.md",
+      "azure-pipelines.yml",
+      "docker",
+      "CNAME",
+      "create-umi"
+    ]
+  }
+}

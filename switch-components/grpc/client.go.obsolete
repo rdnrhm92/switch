@@ -1,0 +1,93 @@
+package grpc
+
+import (
+	"context"
+	"crypto/tls"
+	"fmt"
+	"time"
+
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/credentials/insecure"
+	"google.golang.org/grpc/keepalive"
+)
+
+// Client 封装了 gRPC 客户端连接和额外功能
+type Client struct {
+	*grpc.ClientConn
+	config *ClientConfig
+}
+
+// NewClient 使用给定的配置创建一个新的 gRPC 客户端
+func NewClient(config *ClientConfig) (*Client, error) {
+	if config == nil {
+		config = DefaultClientConfig()
+	}
+
+	ctx, cancel := context.WithTimeout(context.Background(), config.DialTimeout)
+	defer cancel()
+
+	opts := []grpc.DialOption{
+		grpc.WithDefaultCallOptions(grpc.WaitForReady(true)),
+		grpc.WithDefaultCallOptions(
+			grpc.MaxCallRecvMsgSize(config.MaxRecvMsgSize),
+			grpc.MaxCallSendMsgSize(config.MaxSendMsgSize),
+		),
+		grpc.WithKeepaliveParams(keepalive.ClientParameters{
+			Time:                10 * time.Second,
+			Timeout:             3 * time.Second,
+			PermitWithoutStream: true,
+		}),
+	}
+
+	if config.EnableTLS {
+		creds, err := loadClientTLSCredentials(config)
+		if err != nil {
+			return nil, fmt.Errorf("client load TLS fail: %v", err)
+		}
+		opts = append(opts, grpc.WithTransportCredentials(creds))
+	} else {
+		opts = append(opts, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	}
+
+	conn, err := grpc.NewClient(config.Target, opts...)
+	if err != nil {
+		return nil, fmt.Errorf("conn server fail: %v", err)
+	}
+
+	return &Client{
+		ClientConn: conn,
+		config:     config,
+	}, nil
+}
+
+// Close 关闭客户端连接
+func (c *Client) Close() error {
+	if err := c.ClientConn.Close(); err != nil {
+		return fmt.Errorf("关闭连接失败: %v", err)
+	}
+	return nil
+}
+
+// loadClientTLSCredentials 加载客户端的 TLS 凭证
+func loadClientTLSCredentials(config *ClientConfig) (credentials.TransportCredentials, error) {
+	// 如果启用了 mTLS，则加载客户端证书
+	var clientCert tls.Certificate
+	var err error
+	if config.CertFile != "" && config.KeyFile != "" {
+		clientCert, err = tls.LoadX509KeyPair(config.CertFile, config.KeyFile)
+		if err != nil {
+			return nil, fmt.Errorf("加载客户端证书失败: %v", err)
+		}
+	}
+
+	tlsConfig := &tls.Config{
+		ServerName: config.ServerName,
+	}
+
+	if config.CertFile != "" && config.KeyFile != "" {
+		tlsConfig.Certificates = []tls.Certificate{clientCert}
+	}
+
+	return credentials.NewTLS(tlsConfig), nil
+}

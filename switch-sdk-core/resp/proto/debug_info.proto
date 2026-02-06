@@ -1,0 +1,17 @@
+syntax = "proto3";
+package common.response.v1;
+option go_package = "gitee.com/fatzeng/switch-sdk-core/resp/proto;proto";
+
+import "google/protobuf/struct.proto";
+
+message DebugEntry {
+  string level = 1;      // 日志级别
+  int64 timestamp = 2;   // 时间戳（毫秒）
+  string message = 3;    // 调试信息内容
+  google.protobuf.Value data = 4; // 额外数据
+}
+
+message DebugInfo {
+  bool enabled = 1;                // 是否启用调试
+  repeated DebugEntry parts = 2;   // 多条调试信息
+}

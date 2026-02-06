@@ -1,0 +1,17 @@
+syntax = "proto3";
+package common.response.v1;
+option go_package = "gitee.com/fatzeng/switch-sdk-core/resp/proto;proto";
+
+// Statistics 统计信息
+message Statistics {
+  // request address
+  string from = 1;
+  // target address
+  string to = 2;
+  // execute begin time out mill
+  int64 request_time = 3;
+  // execute end time out mill
+  int64 response_time = 4;
+  // execute time out mill
+  optional int64 execute_time = 5;
+}
